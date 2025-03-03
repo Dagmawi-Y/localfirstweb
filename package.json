@@ -39,6 +39,7 @@
 		"vite": "^6.0.0"
 	},
 	"dependencies": {
+		"@google/generative-ai": "^0.22.0",
 		"@sveltejs/adapter-vercel": "^5.5.3",
 		"@vercel/kv": "^3.0.0",
 		"fuse.js": "^7.1.0",

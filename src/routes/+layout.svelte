@@ -6,6 +6,7 @@
 	import EventBanner from '$lib/components/EventBanner.svelte';
 	import { theme } from '$lib/stores/themeStore';
 	import type { LayoutData } from './$types';
+	import Chat from '$lib/components/Chat.svelte';
 	
 	let { data, children } = $props<{data: LayoutData}>();
 </script>
@@ -32,4 +33,5 @@
 	</main>
 	<Footer />
 	<!-- <EventPopup /> -->
+	<Chat />
 </div>
