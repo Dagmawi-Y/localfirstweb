@@ -2,6 +2,7 @@
     import itemJson from '$lib/data/directory/Item.json';
     import categoryJson from '$lib/data/directory/Category.json';
     import type { DirectoryData, CategoryData } from '$lib/types/directory';
+    import { activeCategory } from '$lib/stores/categoryStore';
     
     const items = (itemJson as DirectoryData).records;
     const categories = (categoryJson as CategoryData).records;
@@ -18,12 +19,10 @@
     
     const allCategories = ["All", ...categoryNames].sort();
     
-    let activeCategory = "All";
-    
-    $: filteredItems = activeCategory === "All" 
+    $: filteredItems = $activeCategory === "All" 
         ? items 
         : items.filter(item => {
-            const categoryId = categories.find(c => c.fields.Name === activeCategory)?.id;
+            const categoryId = categories.find(c => c.fields.Name === $activeCategory)?.id;
             return categoryId && item.fields.Categories?.includes(categoryId);
         });
 </script>
@@ -44,10 +43,10 @@
             {#each allCategories as category}
                 <button
                     class="px-4 py-2 rounded-full text-sm font-medium transition-colors
-                           {activeCategory === category 
+                           {$activeCategory === category 
                                ? 'bg-primary text-white' 
                                : 'bg-gray-100 text-gray-700 hover:bg-gray-200 dark:bg-gray-800 dark:text-gray-300 dark:hover:bg-gray-700'}"
-                    on:click={() => activeCategory = category}
+                    on:click={() => activeCategory.set(category)}
                 >
                     {category}
                 </button>
